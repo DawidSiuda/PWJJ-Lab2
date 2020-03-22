@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controler">
+   <children>
+      <ImageView fx:id="background" fitHeight="500.0" fitWidth="730.0" layoutY="2.0">
+         <image>
+            <Image url="@background.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="LabelAddRecord" layoutX="20.0" layoutY="39.0" prefHeight="17.0" prefWidth="75.0" text="Add record" />
+      <TextField fx:id="stringTextPool" layoutX="58.0" layoutY="56.0" />
+      <TextField fx:id="valueTextPool" layoutX="268.0" layoutY="56.0" />
+      <Label fx:id="LabelString" layoutX="20.0" layoutY="60.0" text="String:" />
+      <Label fx:id="LabelValue" layoutX="216.0" layoutY="60.0" text="Value" />
+      <Button fx:id="ButtonAdd" layoutX="425.0" layoutY="56.0" mnemonicParsing="false" onAction="#addButtonClicked" text="Add" />
+      <ListView fx:id="listView" layoutX="486.0" layoutY="56.0" prefHeight="389.0" prefWidth="217.0" />
+      <Button fx:id="ButtonGenerateInt" layoutX="272.0" layoutY="111.0" mnemonicParsing="false" onAction="#generateIntButtonClicked" text="Generate Int" />
+      <TextField fx:id="numberToGenerateTextPool" layoutX="209.0" layoutY="111.0" prefHeight="25.0" prefWidth="52.0" />
+      <Label fx:id="LabelNumberOfRecord" layoutX="23.0" layoutY="115.0" text="Number of record to generate:" />
+      <Separator layoutX="4.0" layoutY="96.0" prefHeight="0.0" prefWidth="463.0" />
+      <Separator layoutX="4.0" layoutY="150.0" prefHeight="3.0" prefWidth="463.0" />
+      <Button fx:id="ButtonGenerateFloat" layoutX="369.0" layoutY="111.0" mnemonicParsing="false" onAction="#generateFloatButtonClicked" text="Generate Float" />
+      <ChoiceBox fx:id="languageChoiceBox" layoutX="118.0" layoutY="453.0" prefHeight="25.0" prefWidth="75.0" />
+      <Label fx:id="LabelSelectLanguage" layoutX="15.0" layoutY="457.0" text="Select language:" />
+      <MenuBar layoutX="4.0" layoutY="2.0" prefHeight="25.0" prefWidth="723.0">
+        <menus>
+          <Menu fx:id="MenuFile" mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="MenuCloce" mnemonicParsing="false" onAction="#closeButtonClicked" text="Close" />
+            </items>
+          </Menu>
+          <Menu fx:id="MenuHelp" mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem fx:id="MenuAbout" mnemonicParsing="false" onAction="#aboutButtonClicked" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Label fx:id="LabelDate" layoutX="549.0" layoutY="457.0" text="Date:" />
+      <Label fx:id="LabelDateText" layoutX="581.0" layoutY="457.0" prefHeight="17.0" prefWidth="82.0" text="00.00.0000" />
+      <Label fx:id="LabelSelectAlgorithm" layoutX="15.0" layoutY="172.0" text="Select algorithm:" />
+      <ChoiceBox fx:id="algorithmChoiceBox" layoutX="132.0" layoutY="168.0" prefHeight="25.0" prefWidth="225.0" />
+      <Button fx:id="ButtonRunAlgorithm" layoutX="376.0" layoutY="168.0" mnemonicParsing="false" onAction="#runAlgorithmButtonClicked" text="Run alghoritm" />
+      <Button fx:id="ButtonChangeLanguage" layoutX="201.0" layoutY="453.0" mnemonicParsing="false" onAction="#buttonChangeLanguageClicked" text=" Change language" />
+   </children>
+</Pane>
