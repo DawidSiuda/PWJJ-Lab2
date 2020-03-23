@@ -1,7 +1,9 @@
 package application;
 
 import java.io.File;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -22,6 +24,7 @@ import package1.FloatElement;
 import package1.FloatSorterQuick;
 import package1.IElement;
 import package1.IntElement;
+import package1.IntSorter;
 
 public class Controler {
     //
@@ -85,6 +88,8 @@ public class Controler {
 
     public ListView<String> listView;
 
+    private Locale locale;
+
     /////////////////////////////////////////////////////////////////////////////////////////////
     // Methods
     //
@@ -108,7 +113,8 @@ public class Controler {
 
         languageChoiceBox.setItems(languagesStringList);
 
-        bundle = ResourceBundle.getBundle("ApplicationResources", new Locale("PL"));
+        locale = new Locale("PL");
+        bundle = ResourceBundle.getBundle("ApplicationResources", locale);
 
         languageChoiceBox.setValue("PL");
 
@@ -120,6 +126,12 @@ public class Controler {
 
         algorithmChoiceBox.setItems(FXCollections.observableArrayList(AlgorithmsEnum.values()));
         algorithmChoiceBox.setValue(AlgorithmsEnum.QUICK_INTELE);
+
+        //
+        // Set default value of number of record to generate.
+        //
+
+        numberToGenerateTextPool.setText("25");
     }
 
     public void addButtonClicked() {
@@ -138,6 +150,7 @@ public class Controler {
             return;
         }
 
+        System.out.println("Adding " + value + " " + strInput);
         varList.add(new FloatElement(value, strInput));
 
         reloadListView();
@@ -165,37 +178,106 @@ public class Controler {
         reloadListView();
     }
 
-    public void generateFloatButtonClicked() {}
+    public void generateFloatButtonClicked() {
+        Integer value;
+
+        try	{
+            value = Integer.parseInt(numberToGenerateTextPool.getText());
+        }
+        catch(Exception e) {
+        	MyMessage.show(bundle.getString("MessageIncorrectValue"));
+            return;
+        }
+
+        varList.clear();
+        Random random = new Random();
+
+        for (int i = 0; i< value; i++)
+        {
+        	float tempValue = (float)random.nextInt(1000000)/10;
+            varList.add(new FloatElement(tempValue, ""));
+        }
+
+        reloadListView();
+    }
 
     public void runAlgorithmButtonClicked() {
 
         switch (algorithmChoiceBox.getSelectionModel().getSelectedItem())
         {
-        case QUICK_IELE:
-        	{
-//				FloatSorterQuick fs = new FloatSorterQuick();
-//
-//				List<IElement<Float>> tempIElementList = new ArrayList<IElement<Float>>();
-//
-//				for(FloatElement flEle : varList)
-//				{
-//					tempIElementList.add(flEle);
-//				}
-//
-//				tempIElementList = fs.solve2(tempIElementList);
-//
-//				varList.clear();
-//
-//				for(IElement flEle : tempIElementList)
-//				{
-//					varList.add((FloatElement)flEle);
-//				}
-                break;
-            }
-        case QUICK_INTELE:
-            break;
+	        case QUICK_IELE:
+	        	{
+		    		FloatSorterQuick floatSorterQuick = new FloatSorterQuick();
+
+		    		List<IElement> tempElementList = new ArrayList<IElement>();
+
+		    		for(IElement flEle : varList)
+		    		{
+//		    			float value = Math.round(flEle.getValue());
+//		    			String name = flEle.getName();
+		    			tempElementList.add(flEle);
+		    		}
+
+		    		tempElementList = floatSorterQuick.solve2(tempElementList);
+
+		    		varList.clear();
+
+		    		for(IElement iEle : tempElementList)
+		    		{
+		    			float value = (float)iEle.getValue();
+		    			String name = iEle.getName();
+		    			varList.add(new FloatElement(value, name));
+		    		}
+
+		    		break;
+	//				FloatSorterQuick fs = new FloatSorterQuick();
+	//
+	//				List<IElement<Float>> tempIElementList = new ArrayList<IElement<Float>>();
+	//
+	//				for(FloatElement flEle : varList)
+	//				{
+	//					tempIElementList.add(flEle);
+	//				}
+	//
+	//				tempIElementList = fs.solve2(tempIElementList);
+	//
+	//				varList.clear();
+	//
+	//				for(IElement flEle : tempIElementList)
+	//				{
+	//					varList.add((FloatElement)flEle);
+	//				}
+	         //       break;
+	            }
+	        case QUICK_INTELE:
+	        {
+	    		IntSorter intSorter = new IntSorter();
+
+	    		List<IntElement> tempElementList = new ArrayList<IntElement>();
+
+	    		for(FloatElement flEle : varList)
+	    		{
+	    			int value = Math.round(flEle.getValue());
+	    			String name = flEle.getName();
+	    			tempElementList.add(new IntElement(value, name));
+	    		}
+
+	    		tempElementList = intSorter.solve(tempElementList);
+
+	    		varList.clear();
+
+	    		for(IntElement intEle : tempElementList)
+	    		{
+	    			float value = (float)intEle.getValue();
+	    			String name = intEle.getName();
+	    			varList.add(new FloatElement(value, name));
+	    		}
+
+	    		break;
+	        }
         }
 
+		reloadListView();
     }
 
     public void closeButtonClicked(){
@@ -208,21 +290,26 @@ public class Controler {
 
     public void buttonChangeLanguageClicked() {
 
+    	System.out.println("FUNCTION: buttonChangeLanguageClicked");
+
     	switch (languageChoiceBox.getSelectionModel().getSelectedItem())
     	{
 		    case "PL":
 		    {
-		    	bundle = ResourceBundle.getBundle("ApplicationResources", new Locale("PL"));
+		    	locale = new Locale("PL");
+		    	bundle = ResourceBundle.getBundle("ApplicationResources", locale);
 		    	break;
 		    }
 		    case "EN(GB)":
 		    {
-		    	bundle = ResourceBundle.getBundle("ApplicationResources", Locale.UK);
+		    	locale = Locale.UK;
+		    	bundle = ResourceBundle.getBundle("ApplicationResources", locale);
 		    	break;
 		    }
 		    case "EN(USA)":
 		    {
-		    	bundle = ResourceBundle.getBundle("ApplicationResources", Locale.US);
+		    	locale = Locale.US;
+		    	bundle = ResourceBundle.getBundle("ApplicationResources", locale);
 		    	break;
 		    }
     	}
@@ -243,7 +330,7 @@ public class Controler {
         LabelNumberOfRecord.setText(bundle.getString("LabelNumberOfRecordToGenerate"));
         LabelAddRecord.setText(bundle.getString("LabelAddRecord"));
         LabelDate.setText(bundle.getString("LabelDate"));
-        // TO DO //LabelDateText.setText(bundle.getString("LabelNumberOfRecordToGenerate"));
+        // TO DO //
         LabelSelectAlgorithm.setText(bundle.getString("LabelSelectAlgorithm"));
         LabelSelectLanguage.setText(bundle.getString("LabelSelectLanguage"));
         LabelString.setText(bundle.getString("LabelString"));
@@ -254,6 +341,9 @@ public class Controler {
 
         MenuCloce.setText(bundle.getString("MenuCloce"));
         MenuAbout.setText(bundle.getString("MenuAbout"));
+
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, locale);
+        LabelDateText.setText(dateFormat.format(new Date()));
     }
 
     private void reloadListView()

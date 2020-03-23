@@ -30,31 +30,7 @@ public class Main extends Application {
 
 			primaryStage.setScene(new Scene(root, 730, 500));
 	        primaryStage.show();
-
-//			addRecordButton = new Button();
-//			addRecordButton.setOnAction(event);
-//
-//			a = new Alert(AlertType.NONE);
-//
-//			event = new EventHandler<ActionEvent>() {
-//		          public void handle(ActionEvent e)
-//		          {
-//		        	  a.setAlertType(AlertType.CONFIRMATION);
-//		        	  a.show();
-//		          }
-//		      };
-
-
-
-//			//BorderPane root = new BorderPane();
-//			Scene scene = new Scene(root,400,400);
-//			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-//			primaryStage.setScene(scene);
-//			primaryStage.show();
-
 	}
-
-	//  EventHandler<ActionEvent>
 
 	public static void main(String[] args) {
 		launch(args);
