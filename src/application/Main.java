@@ -16,12 +16,6 @@ import javafx.scene.control.Alert.AlertType;
 
 public class Main extends Application {
 
-//	@FXML
-//	Button addRecordButton;
-//
-//	Alert a;
-//	EventHandler<ActionEvent> event;
-
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 

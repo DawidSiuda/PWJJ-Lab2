@@ -230,24 +230,6 @@ public class Controler {
 		    		}
 
 		    		break;
-	//				FloatSorterQuick fs = new FloatSorterQuick();
-	//
-	//				List<IElement<Float>> tempIElementList = new ArrayList<IElement<Float>>();
-	//
-	//				for(FloatElement flEle : varList)
-	//				{
-	//					tempIElementList.add(flEle);
-	//				}
-	//
-	//				tempIElementList = fs.solve2(tempIElementList);
-	//
-	//				varList.clear();
-	//
-	//				for(IElement flEle : tempIElementList)
-	//				{
-	//					varList.add((FloatElement)flEle);
-	//				}
-	         //       break;
 	            }
 	        case QUICK_INTELE:
 	        {
@@ -330,7 +312,6 @@ public class Controler {
         LabelNumberOfRecord.setText(bundle.getString("LabelNumberOfRecordToGenerate"));
         LabelAddRecord.setText(bundle.getString("LabelAddRecord"));
         LabelDate.setText(bundle.getString("LabelDate"));
-        // TO DO //
         LabelSelectAlgorithm.setText(bundle.getString("LabelSelectAlgorithm"));
         LabelSelectLanguage.setText(bundle.getString("LabelSelectLanguage"));
         LabelString.setText(bundle.getString("LabelString"));
