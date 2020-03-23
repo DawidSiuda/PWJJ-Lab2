@@ -125,7 +125,7 @@ public class Controler {
         //
 
         algorithmChoiceBox.setItems(FXCollections.observableArrayList(AlgorithmsEnum.values()));
-        algorithmChoiceBox.setValue(AlgorithmsEnum.QUICK_INTELE);
+        algorithmChoiceBox.setValue(AlgorithmsEnum.QUICK_IELE);
 
         //
         // Set default value of number of record to generate.
